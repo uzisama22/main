@@ -1,0 +1,79 @@
+getgenv().TeclasWS = {
+    ["tecla1"] = "N", -- speed +5
+    ["tecla2"] = "M", -- speed -5
+    ["tecla3"] = "H" -- toggle  
+}
+
+
+
+-- // servicios
+local MININOS_DOXXEADOS = game:GetService("Players")
+local AUDIOS_LOUD_DE_TRAP = game:GetService("StarterGui") or "son una mierda"
+
+-- // objetos
+local neonazi = MININOS_DOXXEADOS.LocalPlayer
+local esvastica = neonazi:GetMouse()
+
+-- // variables
+local lista_de_victimas_de_drizzy = getrenv()._G
+local da_hood_rblxm_REAL = getrawmetatable(game)
+local CP = da_hood_rblxm_REAL.__newindex
+local CP_DE_DRIZZY = da_hood_rblxm_REAL.__index
+local velocidad_de_cum = 22
+local es_pedofilo = true
+
+-- // funciones para acortar codigo :]
+function anunciar_atentado_terrorista(fecha_del_atentado)
+    AUDIOS_LOUD_DE_TRAP:SetCore("SendNotification",{
+        Title="techware lol",
+        Text=fecha_del_atentado
+    })
+end
+
+
+getgenv().TECHWAREWALKSPEED_LOADED = true
+
+
+wait(1.5)
+
+
+anunciar_atentado_terrorista("press  "..TeclasWS.tecla3.."to turn off speed")
+
+-- // conexión
+esvastica.KeyDown:Connect(function(el_impostor)
+    if el_impostor:lower() == TeclasWS.tecla1:lower() then
+        velocidad_de_cum = velocidad_de_cum + 1
+        anunciar_atentado_terrorista("播放器速度已提高 (speed = "..tostring(velocidad_de_cum)..")")
+    elseif el_impostor:lower() == TeclasWS.tecla2:lower() then
+        velocidad_de_cum = velocidad_de_cum - 1
+        anunciar_atentado_terrorista("玩家的速度已降低 (speed = "..tostring(velocidad_de_cum)..")")
+    elseif el_impostor:lower() == TeclasWS.tecla3:lower() then
+        if es_pedofilo then
+            es_pedofilo = false
+            anunciar_atentado_terrorista("techware speed off")
+        else
+            es_pedofilo = true
+            anunciar_atentado_terrorista("techware speed on")
+        end
+    end
+end)
+
+-- // mi parte favorita: metametodos
+setreadonly(da_hood_rblxm_REAL,false)
+da_hood_rblxm_REAL.__index = newcclosure(function(BEST_ON_TOP,IS_GARBAGE)
+    local esPedofilo = checkcaller()
+    if IS_GARBAGE == "WalkSpeed" and not esPedofilo then
+        return lista_de_victimas_de_drizzy.CurrentWS
+    end
+    return CP_DE_DRIZZY(BEST_ON_TOP,IS_GARBAGE)
+end)
+da_hood_rblxm_REAL.__newindex = newcclosure(function(kaias,ip,logger)
+    local unNeonazi = checkcaller()
+    if es_pedofilo then
+        if ip == "WalkSpeed" and logger ~= 0 and not unNeonazi then
+            return CP(kaias,ip,velocidad_de_cum)
+        end
+    end
+    return CP(kaias,ip,logger)
+end)
+setreadonly(da_hood_rblxm_REAL,true)
