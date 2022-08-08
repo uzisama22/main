@@ -1,0 +1,23 @@
+local HotKey = Enum.KeyCode.RightShift
+local UIS = game:GetService("UserInputService")
+local Open = true
+
+UIS.InputBegan:Connect(function(Key)
+    if Key.KeyCode == HotKey then
+        if Open == false then
+            Open = true
+            for _,ScreenGui in pairs(game:GetService("CoreGui"):GetChildren()) do
+                if ScreenGui:FindFirstChild("Toggle") then
+                    ScreenGui.Enabled = Open
+                end
+            end
+        elseif Open == true then
+            Open = false
+            for _,ScreenGui in pairs(game:GetService("CoreGui"):GetChildren()) do
+                if ScreenGui:FindFirstChild("Toggle") then
+                    ScreenGui.Enabled = Open
+                end
+            end
+        end
+    end
+end)
